@@ -5,4 +5,3 @@ django
 django-crispy-forms
 crispy-bootstrap5
 pandas
-pillow
