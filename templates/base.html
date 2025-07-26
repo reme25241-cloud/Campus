@@ -166,6 +166,11 @@
       opacity: 1;
     }
 
+    .dropdown-toggle-small {
+      font-size: 1rem !important;
+      padding: 4px !important;
+    }
+
     footer {
       background: rgba(0, 123, 255, 0.8);
       color: #fff;
@@ -268,6 +273,8 @@
 
     <a href="{% url 'bought_history' %}" title="History"><i class="bi bi-wallet2"></i></a>
 
+    <a href="{% url 'profile' %}" title="History"><i class="bi bi-person-circle"></i></a>
+
     <!-- Dropdown Submenu -->
     <div class="dropup">
       <a href="#" class="dropdown-toggle text-white fs-5" data-bs-toggle="dropdown" title="More Options">
@@ -277,7 +284,7 @@
 
 
         {% if user.is_authenticated %}
-          <li><a class="dropdown-item more-icon" href="{% url 'profile' %}" data-label="Profile"><i class="bi bi-person-circle"></i></a></li>
+          <!-- <li><a class="dropdown-item more-icon" href="{% url 'profile' %}" data-label="Profile"><i class="bi bi-person-circle"></i></a></li> -->
 
           <li><a class="dropdown-item more-icon" href="{% url 'about' %}" data-label="About"><i class="bi bi-info-circle"></i></a></li>
 
