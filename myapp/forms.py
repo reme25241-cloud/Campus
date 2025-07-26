@@ -43,7 +43,7 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = ['message']
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Write your feedback here...'}),
+            'message': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Write your feedback here...'}),
         }
 # myapp/forms.py
 from django import forms
