@@ -591,3 +591,41 @@ def delete_category(request, category_id):
         messages.success(request, "Category deleted.")
         return redirect('category_list')
     return render(request, 'category/delete_category.html', {'category': category})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import ReturnProduct, ManualPaymentInfo
+from django.contrib import messages
+
+def is_staff(user):
+    return user.is_staff
+
+@user_passes_test(is_staff)
+def return_request_detail(request, return_id):
+    return_request = get_object_or_404(ReturnProduct, id=return_id)
+    manual_payment = ManualPaymentInfo.objects.filter(user=return_request.user).first()
+
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action == "approve":
+            return_request.approved = True
+            messages.success(request, "Return approved.")
+        elif action == "decline":
+            return_request.approved = False
+            messages.warning(request, "Return declined.")
+        return_request.save()
+        return redirect("return_request_detail", return_id=return_id)
+
+    return render(request, "return/return_request_detail.html", {
+        "return_request": return_request,
+        "manual_payment": manual_payment
+    })
+
+from django.contrib.admin.views.decorators import staff_member_required
+
+@staff_member_required
+def return_request_list(request):
+    return_requests = ReturnProduct.objects.select_related('user', 'product').order_by('-requested_at')
+    return render(request, 'return/return_request_list.html', {
+        'return_requests': return_requests
+    })

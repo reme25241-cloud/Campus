@@ -177,3 +177,5 @@ class BoughtProduct(models.Model):
 
     def __str__(self):
         return f"{self.buyer.username} bought {self.product.title} x{self.quantity}"
+
+

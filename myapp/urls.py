@@ -72,6 +72,8 @@ urlpatterns = [
     path('categories/add/', add_category, name='add_category'),
     path('categories/<int:category_id>/delete/', delete_category, name='delete_category'),
     
+    path("return-requests/", return_request_list, name="return_request_list"),
+    path("return-request/<int:return_id>/", return_request_detail, name="return_request_detail"),
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
