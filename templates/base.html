@@ -192,7 +192,12 @@
                   <li><a class="dropdown-item" href="{% url 'my_pending_purchases' %}">My Purchases</a></li>
                 {% endif %}
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                <li>
+                  <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-light dropdown-item"> Logout</button>
+                  </form>
+                </li>
               </ul>
             </li>
           {% else %}
