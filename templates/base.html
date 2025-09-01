@@ -21,16 +21,21 @@
       position: relative;
     }
 
-    .background-image {
-      background: url('https://enrollacademy.com/wp-content/uploads/2024/02/kle-college-of-engineering-technology-chikodi-281266.jpg') no-repeat center center fixed;
-      background-size: cover;
-      filter: blur(6px);
-      height: 100%;
-      width: 100%;
-      position: fixed;
-      z-index: -2;
+  .background-image {
+    background: url(
+      {% if request.user.is_superuser %}
+        'https://imgs.search.brave.com/4tWwyqiMOhKEXvfz31krlGdDrFJh6XTHMru6L1DGxmE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/NjQ5NTE0MzQxMTIt/NjRkNzRjYzJhMmQ3/P2ZtPWpwZyZxPTYw/Jnc9MzAwMCZpeGxp/Yj1yYi00LjEuMCZp/eGlkPU0zd3hNakEz/ZkRCOE1IeHpaV0Z5/WTJoOE1ueDhjR2x1/YXlVeU1HSnNkV1Y4/Wlc1OE1IeDhNSHg4/ZkRBPQ'
+      {% else %}
+        'https://enrollacademy.com/wp-content/uploads/2024/02/kle-college-of-engineering-technology-chikodi-281266.jpg'
+      {% endif %}
+    ) no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(6px);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -2;
     }
-
     .glassy-navbar {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(8px);
@@ -179,7 +184,8 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 {% if user.is_superuser %}
-                  <li><a class="dropdown-item text-danger fw-bold">🛠 Admin Panel</a></li>
+                  <li><a class="dropdown-item text-danger fw-bold">🛠 Admin Panel</a></li>                  
+                  <li><a class="dropdown-item" href="{% url 'product_list' %}">Product List</a></li>
                   <li><a class="dropdown-item" href="{% url 'category_list' %}">Categories</a></li>
                   <li><a class="dropdown-item" href="{% url 'view_feedbacks' %}">Feedback</a></li>
                   <li><a class="dropdown-item" href="{% url 'purchase_requests' %}">Purchase Requests</a></li>

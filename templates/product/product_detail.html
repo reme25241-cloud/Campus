@@ -21,7 +21,8 @@
                             <p class="text-muted">{{ product.description }}</p>
 
                             <p class="mb-2"><strong>Cost:</strong> ₹{{ product.cost }}</p>
-                            <p class="mb-4"><strong>Category:</strong> {{ product.category.name }}</p>
+                            <p class="mb-2"><strong>Category:</strong> {{ product.category.name }}</p>
+                            <p class="mb-4"><strong>Uploaded by:</strong> {{ product.user.username }}</p>
 
                             <!-- Add to Cart Form -->
                             <form method="post" action="{% url 'add_to_cart' product.id %}" class="mb-3">
@@ -43,6 +44,18 @@
                                     {% if is_in_wishlist %} Remove from Wishlist {% else %} Add to Wishlist {% endif %}
                                 </button>
                             </form>
+
+                            <!-- Edit & Delete (only visible to product owner) -->
+                            {% if request.user == product.user %}
+                                <div class="mt-3 d-flex gap-2">
+                                    <a href="{% url 'product_edit' product.id %}" class="btn btn-primary w-50">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a href="{% url 'product_delete' product.id %}" class="btn btn-danger w-50">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
