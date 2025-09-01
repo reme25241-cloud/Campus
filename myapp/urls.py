@@ -37,7 +37,8 @@ urlpatterns = [
     path('product/<int:pk>/', product_detail, name='product_detail'),
     path('product/add/', product_create, name='product_create'),
     path('product/<int:pk>/edit/', product_edit, name='product_edit'),
-    
+    path('product/<int:pk>/delete/', product_delete, name='product_delete'),
+
     path('wishlist/', wishlist_view, name='wishlist'),
     path('wishlist/add/<int:product_id>/', add_to_wishlist, name='add_to_wishlist'),
     path('wishlist/remove/<int:product_id>/', remove_from_wishlist, name='remove_from_wishlist'),
